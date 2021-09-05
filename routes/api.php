@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:api']], function () {
+    // Bus Stops
+    Route::resource('bus_stops', 'App\Http\Controllers\BusStopController', ['only' => ['index']]);
+
+    // Buses
+    Route::resource('buses', 'App\Http\Controllers\BusController', ['only' => ['store']]);
 });
